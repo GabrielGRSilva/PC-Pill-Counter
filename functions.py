@@ -5,13 +5,24 @@ def check_count(medicine_name):
         return "Medicine not found. Have you created it with [n]New medicine?"
     
     file = open(f"data/{medicine_name}.txt", "r")
-    line_1 = file.readline() ##Reads the file, but how do I check exactly how many pills are left?
-    if "Pills Left" in line_1:
-        line_split_1 = line_1.split(':')
-        return f'You have{line_split_1[1]}pills of {medicine_name} left' ##Need to fix it to ignore the \n
+    pills_left = file.read()
+    return f"You have {pills_left} pills of {medicine_name} left"
+
     
 def take_pill(medicine_name):
     if not os.path.exists(f"data/{medicine_name}.txt"):
         return "Medicine not found. Have you created it with [n]New medicine?"
     
+    file = open(f"data/{medicine_name}.txt", "r")
+    read_pills = file.read()
+
+    try:
+        current_pills = int(read_pills)
+    except ValueError:
+        return "Value Error: Couldn't access the number of pills. Check if the data for this medicine is correct."
+    
+    new_current = current_pills - 1
+    with open(f"data/{medicine_name}.txt", "w") as f:
+        f.write(f"{new_current}")
+    return f"Pill taken. You now have {new_current} pills of {medicine_name} left."
         

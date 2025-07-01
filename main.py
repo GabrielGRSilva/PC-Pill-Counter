@@ -15,35 +15,29 @@ while True:
     print("Please select an option:")
     option = input(menu)
 
-    if option == "t":
-        print("Which medicine are you taking now?")
-        #asks for user input on the name of medicine, choosing from those that were added to their inventory
-        #removes one from the total and marks medicine as taken for today
-        print("<Medicine name> taken!") #add later the name of the medicine
-
+    if option == "t": #removes one from the total and marks medicine as taken for today
+        medicine_to_take = input("Which medicine are you taking now?")
+        print(functions.take_pill(medicine_to_take))
     
     elif option == "c":
-        medicine_to_check = input("Which medicine count would you like to check?")
+        medicine_to_check = input("Which medicine count would you like to check? ")
         pills_left = functions.check_count(medicine_to_check)
         print(pills_left)
-        #asks for user input on the name of medicine, choosing from those that were added to their inventory
 
     elif option == "a":
-        print("Which medicine would you like to add more pills of?")
+        print("Which medicine would you like to add more pills of? ")
         #asks for user input on the name of medicine, choosing from those that were added to their inventory
-        print("How many pills do you want to add to your inventory?")
+        print("How many pills do you want to add to your inventory? ")
         #asks for a number input, adding the number to the total of pills from that medicine
 
     elif option == "n":
         # asks for input and creates a new instance of the medicine class
-        new_medicine = input("Please provide the name of the new medicine:")
-        time_to_take = input("At which time of day you will take this medicine? Provide just the number, like 15 for 15h: ")
-        #if time_to_take not int or > 24:           ADD ERROR MESSAGES LATER
-        #    print("Invalid time. Please start again providing the time of day you'll take the medicine")
-        starting_pills = input("Finally, how many pills you already have for this medicine? ")
-        #if starting_pills not int:
-        #    print("Invalid number of pills. Please type only numbers")
-        new_medicine = medicine.Medicine(new_medicine, time_to_take, starting_pills)
+        new_medicine = input("Please provide the name of the new medicine: ")
+        starting_pills = input("How many pills you already have for this medicine? ")
+        if starting_pills.isdigit() == False:
+            print("Invalid number of pills. Please type only numbers")
+        else:
+            new_medicine = medicine.Medicine(new_medicine, starting_pills)
     
     elif option == "h":
         print("[t] Take pill -- Removes one pill from the total amount and marks the medicine as taken for today")
