@@ -1,0 +1,2 @@
+Pills Left: 10
+Daily Time: 8
