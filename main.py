@@ -1,4 +1,5 @@
 import medicine
+import functions
 
 menu = """
 [t] Take pill
@@ -23,8 +24,8 @@ while True:
     
     elif option == "c":
         medicine_to_check = input("Which medicine count would you like to check?")
-        pills_left = medicine.Medicine.check_count(medicine_to_check)
-        print(f"You have {pills_left} pills left.")
+        pills_left = functions.check_count(medicine_to_check)
+        print(pills_left)
         #asks for user input on the name of medicine, choosing from those that were added to their inventory
 
     elif option == "a":
