@@ -50,3 +50,10 @@ def delete_medicine(medicine_name):
     os.remove(f"data/{medicine_name}.txt")
     return "Success! Medicine successfully removed from your inventory.\n"
     
+def medicine_list(): #shows all currently tracked meds
+    file_list = os.listdir("data/")
+    tracked_meds = []
+    for med in file_list:       #This loop makes only the name of the meds appear to the user, without the file extensions
+        remove_txt = med.rstrip(".txt")
+        tracked_meds.append(remove_txt)
+    return f"Currently tracked medicine: {tracked_meds}\n"

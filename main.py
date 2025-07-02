@@ -12,7 +12,7 @@ menu = """
 [q] Quit\n
 """
 print("========Welcome to Pill Counter!========")
-
+print(functions.medicine_list())
 while True:
     print("Please select an option:")
     option = input(menu).lower() #the lower guarantees the user input works whether they write A or a, for example.
