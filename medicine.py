@@ -14,6 +14,3 @@ class Medicine:
             file.write(self.initial_count)
             file.close()
             print(f"Success! New medicine added: {self.name}")
-
-
-##    ; Remaining Pills; Daily Pills used; Time the medication is taken; If the pill was taken today or not yet;
