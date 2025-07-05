@@ -1,5 +1,6 @@
 import medicine
 import functions
+import os
 
 #The front menu that shows the available features to the user
 #MAKE LIST OF ALL MEDICINE IN INVENTORY!!!!
@@ -12,6 +13,10 @@ menu = """
 [q] Quit\n
 """
 print("========Welcome to Pill Counter!========")
+
+if not os.path.exists("data/"):
+    os.makedirs("data/") #Creates the data folder if it doesn't exist
+    
 while True:
     print("Please select an option:")
     option = input(menu).lower() #the "lower" guarantees the user input works whether they write A or a, for example.
