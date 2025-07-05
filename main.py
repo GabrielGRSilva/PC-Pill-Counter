@@ -13,7 +13,6 @@ menu = """
 """
 print("========Welcome to Pill Counter!========")
 while True:
-    print(functions.medicine_list()) #shows which medicine are currently tracked in the data folder
     print("Please select an option:")
     option = input(menu).lower() #the lower guarantees the user input works whether they write A or a, for example.
 
@@ -22,9 +21,9 @@ while True:
         print(functions.take_pill(medicine_to_take.upper())) #the upper() function makes all strings UPPERCASE as standard, avoiding errors
     
     elif option == "c": #checks current medicine count from the data folder
-        medicine_to_check = input("Which medicine count would you like to check?\n")
-        pills_left = functions.check_count(medicine_to_check.upper())
-        print(pills_left)
+        print("Currently tracked medicine:\n")
+        functions.check_count()
+        print ("\n") #This makes sure the medicine list is an empty line above the next menu
 
     elif option == "r": #adds more pills, like when the user buys more
         medicine_to_add = input("Which medicine would you like to add more pills of?\n")

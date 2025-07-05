@@ -1,14 +1,5 @@
 import os
 
-def check_count(medicine_name):
-    if not os.path.exists(f"data/{medicine_name}.txt"):
-        return "Medicine not found. Have you created it with [n]New medicine?\n" #the \n guarantees new paragraphs to make the terminal clearer to the user
-    
-    file = open(f"data/{medicine_name}.txt", "r")
-    pills_left = file.read()
-    return f"You have {pills_left} pills of {medicine_name} left\n"
-
-    
 def take_pill(medicine_name):
     if not os.path.exists(f"data/{medicine_name}.txt"):
         return "Medicine not found. Have you created it with [n]New medicine?\n"
@@ -50,10 +41,11 @@ def delete_medicine(medicine_name):
     os.remove(f"data/{medicine_name}.txt")
     return "Success! Medicine successfully removed from your inventory.\n"
     
-def medicine_list(): #shows all currently tracked meds
+def check_count(): #shows all currently tracked meds
     file_list = os.listdir("data/")
-    tracked_meds = []
-    for med in file_list:       #This loop makes only the name of the meds appear to the user, without the file extensions
-        remove_txt = med.rstrip(".txt")
-        tracked_meds.append(remove_txt)
-    return f"Currently tracked medicine: {tracked_meds}\n"
+    for med in file_list:    
+        remove_txt = med.rstrip(".txt") #This makes only the name of the meds appear to the user, without the file extensions
+        file = open(f"data/{med}", "r")
+        pills_left = file.read()
+        print(f"{remove_txt}: {pills_left} pills left")
+        file.close()
