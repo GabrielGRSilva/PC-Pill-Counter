@@ -31,14 +31,18 @@ while True:
         print ("\n") #This makes sure the medicine list is an empty line above the next menu
 
     elif option == "r": #adds more pills, like when the user buys more
-        medicine_to_add = input("Which medicine would you like to add more pills of?\n")
-        print(functions.check_count(medicine_to_add.upper()))
+        print("Currently tracked medicine:\n")
+        functions.print_med_list()
+        medicine_to_add = input("Select the number of the medicine you want to add more pills: \n")
+        if medicine_to_add.isdigit() == False:                      #Checks if the user is typing numbers
+            print("ERROR! Please choose the NUMBER of the medicine you are taking")
+            
         count_to_add = input("How many pills would you like to add to the inventory?\n")
 
-        if count_to_add.isdigit() == False:                         #Checks if the user is typing numbers
+        if count_to_add.isdigit() == False:
             print("Invalid number of pills. Please type only positive numbers\n")
         else:
-            print(functions.add_more_meds(medicine_to_add.upper(), count_to_add))
+            print(functions.add_more_meds(medicine_to_add, count_to_add))
 
     elif option == "a": 
         suboption = input("Do you want to [a]dd a new medicine or [r]emove one from your list?")

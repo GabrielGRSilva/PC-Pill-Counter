@@ -33,11 +33,12 @@ def take_pill(medicine_number):
         f.write(f"{new_current}")
     return f"Pill taken. You now have {new_current} pills of {med_name} left.\n"
 
-def add_more_meds(medicine_name, count_to_add):
-    if not os.path.exists(f"data/{medicine_name}.txt"):
-        return "Medicine not found. Have you created it with [n]New medicine?\n"
+def add_more_meds(medicine_number, count_to_add):
+    med_list = create_med_list()
+    index = int(medicine_number) - 1 #The user will type a number starting from 1. This fixes it to find the right index
+    med_name = med_list[index]
     
-    file = open(f"data/{medicine_name}.txt", "r")
+    file = open(f"data/{med_name}.txt", "r")
     read_pills = file.read()
 
     try:
@@ -46,9 +47,9 @@ def add_more_meds(medicine_name, count_to_add):
         return "Value Error: Couldn't access the number of pills. Check if the data for this medicine is correct.\n"
     
     new_current = current_pills + int(count_to_add)
-    with open(f"data/{medicine_name}.txt", "w") as f:
+    with open(f"data/{med_name}.txt", "w") as f:
         f.write(f"{new_current}")
-    return f"Success! You now have {new_current} pills of {medicine_name}.\n"
+    return f"Success! You now have {new_current} pills of {med_name}.\n"
 
 def delete_medicine(medicine_name):
     if not os.path.exists(f"data/{medicine_name}.txt"):
