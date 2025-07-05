@@ -14,11 +14,16 @@ menu = """
 print("========Welcome to Pill Counter!========")
 while True:
     print("Please select an option:")
-    option = input(menu).lower() #the lower guarantees the user input works whether they write A or a, for example.
+    option = input(menu).lower() #the "lower" guarantees the user input works whether they write A or a, for example.
 
     if option == "t": #removes one from the total and marks medicine as taken for today
-        medicine_to_take = input("Which medicine are you taking now?\n") #The \n will make the terminal more organized to receive the input
-        print(functions.take_pill(medicine_to_take.upper())) #the upper() function makes all strings UPPERCASE as standard, avoiding errors
+        print("Currently tracked medicine:\n")
+        functions.print_med_list()
+        medicine_to_take = input("Select the number of the medicine you are taking now: \n") #The \n will make the terminal more organized to receive the input
+        if medicine_to_take.isdigit():
+            print(functions.take_pill(medicine_to_take))
+        else:
+            print("ERROR! Please choose the NUMBER of the medicine you are taking")
     
     elif option == "c": #checks current medicine count from the data folder
         print("Currently tracked medicine:\n")
