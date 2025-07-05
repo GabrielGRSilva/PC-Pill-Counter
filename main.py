@@ -17,13 +17,16 @@ while True:
     option = input(menu).lower() #the "lower" guarantees the user input works whether they write A or a, for example.
 
     if option == "t": #removes one from the total and marks medicine as taken for today
-        print("Currently tracked medicine:\n")
-        functions.print_med_list()
-        medicine_to_take = input("Select the number of the medicine you are taking now: \n") #The \n will make the terminal more organized to receive the input
-        if medicine_to_take.isdigit():
-            print(functions.take_pill(medicine_to_take))
+        if functions.create_med_list() == []: #checks if the list is empty
+            print("No medicine is currently being tracked!\n")
         else:
-            print("ERROR! Please choose the NUMBER of the medicine you are taking")
+            print("Currently tracked medicine:\n")
+            functions.print_med_list()
+            medicine_to_take = input("Select the number of the medicine you are taking now: \n") #The \n will make the terminal more organized to receive the input
+            if medicine_to_take.isdigit():
+                print(functions.take_pill(medicine_to_take))
+            else:
+                print("ERROR! Please choose the NUMBER of the medicine you are taking")
     
     elif option == "c": #checks current medicine count from the data folder
         print("Currently tracked medicine:\n")
@@ -66,10 +69,10 @@ while True:
             print("Invalid suboption! Choose between [a] (add new medicine) or [r] (remove existing medicine)\n")
     
     elif option == "h": #explains the available commands to the user
-        print("[t] Take pill -- Removes one pill from the total amount and marks the medicine as taken for today")
-        print("[c] Check how many pills are left -- Allows you to see how many pills you have left from a certain medicine")
-        print("[r] Refill medicine inventory with more pills -- Adds more pills to your total (for example, when you have bought more)")
-        print("[a] Add or remove medicine from your list -- Adds or remove a new medicine from the app data")
+        print("[t] Take pill -- Removes one pill from the total amount it has")
+        print("[c] Check how many pills are left -- Allows you to see how many pills of each medicine you have left")
+        print("[r] Refill medicine inventory with more pills -- Adds more pills to a medicine (for example, when you have bought more)")
+        print("[a] Add or remove medicine from your list -- Adds or remove a medicine from the app data")
         print("[q] Quit - Exits Pill Counter\n") #\n in the end provides a paragraph after the next menu instance is printed
 
     elif option == "q":

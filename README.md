@@ -14,3 +14,5 @@ Planned features:
 -Turn Pill Counter into an Android app with complete UI.
 -Add reminder when the pill counter for a certain medicine becomes too low.
 -Enable users to create a daily reminder for when they should take a certain medicine.
+
+The PCIcon image was created using MetaAI.
