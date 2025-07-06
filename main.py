@@ -1,9 +1,7 @@
-import medicine
 import functions
 import os
 
 #The front menu that shows the available features to the user
-#MAKE LIST OF ALL MEDICINE IN INVENTORY!!!!
 menu = """
 [t] Take pill
 [c] Check how many pills are left
@@ -22,49 +20,42 @@ while True:
     option = input(menu).lower() #the "lower" guarantees the user input works whether they write A or a, for example.
 
     if option == "t": #removes one from the total and marks medicine as taken for today
-        if functions.create_med_list() == []: #checks if the list is empty
-            print("No medicine is currently being tracked!\n")
+        medicine_name = functions.choose_medicine()
+        pills_taken = input("How many pills are you taking?")
+        if pills_taken.isdigit():
+            print(functions.take_pill(medicine_name, pills_taken))
         else:
-            print("Currently tracked medicine:\n")
-            functions.print_med_list()
-            medicine_to_take = input("Select the number of the medicine you are taking now: \n") #The \n will make the terminal more organized to receive the input
-            if medicine_to_take.isdigit():
-                print(functions.take_pill(medicine_to_take))
-            else:
-                print("ERROR! Please choose the NUMBER of the medicine you are taking")
+            print("ERROR! Please choose the NUMBER of the medicine you are taking and a valid number of pills to take.")
     
     elif option == "c": #checks current medicine count from the data folder
         print("Currently tracked medicine:\n")
-        functions.check_count()
-        print ("\n") #This makes sure the medicine list is an empty line above the next menu
+        functions.show_tracked_medicines()
+        print("\n")
 
     elif option == "r": #adds more pills, like when the user buys more
         print("Currently tracked medicine:\n")
-        functions.print_med_list()
-        medicine_to_add = input("Select the number of the medicine you want to add more pills: \n")
-        if medicine_to_add.isdigit() == False:                      #Checks if the user is typing numbers
-            print("ERROR! Please choose the NUMBER of the medicine you are taking")
+        medicine_name = functions.choose_medicine()
             
         count_to_add = input("How many pills would you like to add to the inventory?\n")
 
         if count_to_add.isdigit() == False:
             print("Invalid number of pills. Please type only positive numbers\n")
         else:
-            print(functions.add_more_meds(medicine_to_add, count_to_add))
+            print(functions.add_more_meds(medicine_name, count_to_add))
 
     elif option == "a": 
-        suboption = input("Do you want to [a]dd a new medicine or [r]emove one from your list?")
+        suboption = input("Do you want to [a]dd a new medicine or [r]emove one from your list?\n")
 
-        if suboption == "a": #creates new file on the data folder with the new medicine
+        if suboption == "a": #add new med to JSON file
 
-            new_medicine = input("Please provide the name of the new medicine:\n")
-            starting_pills = input("How many pills you already have for this medicine?\n")
-            if starting_pills.isdigit() == False:
+            medicine_name = input("Please provide the name of the new medicine:\n").upper()
+            starting_quantity = input("How many pills you already have for this medicine?\n")
+            if starting_quantity.isdigit() == False:
                 print("Invalid number of pills. Please type only numbers\n")
             else:
-                new_medicine = medicine.Medicine(new_medicine.upper(), starting_pills)
+                functions.add_new_medicine(medicine_name, starting_quantity)
         
-        elif suboption == "r": #removes existing file from inventory
+        elif suboption == "r": #removes existing file from data
 
             print("WARNING: This will remove all existing data for the medicine you choose!\n")
             med_to_delete = input("Please provide the name of the medicine you want to delete:\n")
