@@ -46,15 +46,16 @@ def take_pill(medicine_name, pills_taken):
        medicines = json.load(f)
 
     if medicine_name in medicines:
-        medicines[medicine_name] -= int(pills_taken)
-        with open("data/medicines.json", "w") as f: #Save data to JSON file
-            json.dump(medicines, f, indent = 4)
-            f.close()
-        return f"Sucess! {pills_taken} pill(s) taken. {medicine_name} now has {medicines[medicine_name]} pills remaining."
+        if int(medicines[medicine_name]) >= int(pills_taken):
+            medicines[medicine_name] = int(medicines[medicine_name]) - int(pills_taken)
+            with open("data/medicines.json", "w") as f: #Save data to JSON file
+                json.dump(medicines, f, indent = 4)
+                f.close()
+            return f"Sucess! {pills_taken} pill(s) taken. {medicine_name} now has {medicines[medicine_name]} pills remaining."
         
     else:
         f.close()
-        return f"ERROR! {medicine_name} isn't currently being tracked! Add it first."
+        return f"ERROR! Either {medicine_name} isn't being tracked or you don't have enough pills!"
 
 def add_new_medicine(medicine_name, starting_quantity):
     with open("data/medicines.json", "r") as f:

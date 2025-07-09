@@ -21,7 +21,7 @@ while True:
 
     if option == "t": #removes one from the total and marks medicine as taken for today
         medicine_name = functions.choose_medicine()
-        pills_taken = input("How many pills are you taking?")
+        pills_taken = input("How many pills are you taking? ")
         if pills_taken.isdigit():
             print(functions.take_pill(medicine_name, pills_taken))
         else:
@@ -65,7 +65,7 @@ while True:
             print("Invalid suboption! Choose between [a] (add new medicine) or [r] (remove existing medicine)\n")
     
     elif option == "h": #explains the available commands to the user
-        print("[t] Take pill -- Removes one pill from the total amount it has")
+        print("[t] Take pill -- Removes the chosen number of pills from the total amount a medicine has stored")
         print("[c] Check how many pills are left -- Allows you to see how many pills of each medicine you have left")
         print("[r] Refill medicine inventory with more pills -- Adds more pills to a medicine (for example, when you have bought more)")
         print("[a] Add or remove medicine from your list -- Adds or remove a medicine from the app data")
